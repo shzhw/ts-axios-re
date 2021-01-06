@@ -20,3 +20,18 @@ export function transformHeaders(headers: any, data: any): any {
   }
   return headers
 }
+
+export function parseHeaders(headers: string): any {
+  if (!headers) return headers
+  let _temp: any = {}
+  headers.split('\r\n').forEach(item => {
+    item = item.trim()
+    if (!item) return
+    let [key, val] = item.split(':')
+    key = key.trim()
+    if (!key) return
+    if (val) val = val.trim()
+    _temp[key] = val
+  })
+  return _temp
+}
